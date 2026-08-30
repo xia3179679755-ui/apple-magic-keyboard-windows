@@ -15,6 +15,34 @@
 - 拉取仓库后可以离线安装。
 - 不安装 PowerToys，不修改全局键位，因此不会影响普通 Windows 键盘。
 
+## 可选：妙控键盘按键映射
+
+驱动安装完成后，可选安装 AutoHotkey v2 映射层，让 Apple 键盘底排更符合 Windows 快捷键习惯：
+
+| Apple 键帽 | Windows 行为 |
+| --- | --- |
+| Command | Ctrl |
+| Control | Win |
+| Option | Alt（保持不变） |
+
+这样可以直接使用 `Command+C`、`Command+V`、`Command+Z`、`Command+Tab` 等常用快捷键。映射只在 `AppleMagicKeyboard.ahk` 运行时生效；退出 AutoHotkey 托盘菜单中的脚本即可恢复默认布局。由于 Windows 的普通键盘钩子不能可靠区分物理键盘设备，映射启用期间也会影响其他连接的 Windows 键盘。
+
+1. 安装 [AutoHotkey v2](https://www.autohotkey.com/)。
+2. 以普通 PowerShell 运行以下命令，创建当前用户的开机自启并立即启用映射：
+
+```powershell
+powershell.exe -ExecutionPolicy Bypass -File .\Install-AppleMagicKeyboardMapping.ps1
+```
+
+要移除开机自启，请运行：
+
+```powershell
+powershell.exe -ExecutionPolicy Bypass -File .\Install-AppleMagicKeyboardMapping.ps1 -Remove
+```
+
+`Fn` 键由键盘硬件处理，AutoHotkey 无法单独识别它；功能键和媒体键行为仍由 Apple 驱动决定。
+
+
 ## 使用方法
 
 先在管理员 PowerShell 中验证文件：
