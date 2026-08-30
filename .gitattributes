@@ -1,0 +1,4 @@
+*.exe binary
+*.ps1 text eol=crlf
+*.md text eol=lf
+*.sha256 text eol=lf
