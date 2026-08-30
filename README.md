@@ -1,23 +1,53 @@
-# 用于苹果妙控键盘的Windows
+# Apple 妙控键盘与妙控鼠标 Windows 驱动
 
-这是一个离线安装包，用于在 Windows 10/11 上安装 Apple 妙控键盘和妙控鼠标 2 的 Apple 签名驱动。
+适用于 Windows 10/11 的离线安装包，为 Apple 妙控键盘 2/3 和妙控鼠标 2 安装 Apple 签名驱动，并提供可选的键盘底排映射。
 
-已针对以下设备标识制作：
+支持的设备：
 
 - 妙控键盘：`VID_05AC&PID_0267`
 - 妙控鼠标 2：`VID_05AC&PID_0269`
 
-## 功能
+## 提供的功能
 
-- 安装妙控键盘 2/3 的 Apple 驱动。
-- 安装妙控鼠标 2 的 Apple 驱动，启用触控滚动支持。
-- 安装前核验固定 SHA-256 和 Apple Inc. 数字签名。
-- 拉取仓库后可以离线安装。
-- 不安装 PowerToys，不修改全局键位，因此不会影响普通 Windows 键盘。
+- 安装 Apple 妙控键盘 2/3 驱动。
+- 安装 Apple 妙控鼠标 2 驱动，启用原生触控滚动。
+- 在安装前验证固定 SHA-256 和 Apple Inc. 数字签名。
+- 下载仓库后可离线安装。
+- 提供可选的 Command、Control 键位交换映射。
+
+本项目不安装 PowerToys，不更改注册表，也不包含鼠标前进/后退手势重映射。
+
+## 驱动安装
+
+请在管理员 PowerShell 中先验证文件：
+
+```powershell
+powershell.exe -ExecutionPolicy Bypass -File .\Install-AppleMagicWindows.ps1 -VerifyOnly
+```
+
+验证通过后安装键盘和鼠标驱动：
+
+```powershell
+powershell.exe -ExecutionPolicy Bypass -File .\Install-AppleMagicWindows.ps1
+```
+
+仅安装键盘驱动：
+
+```powershell
+powershell.exe -ExecutionPolicy Bypass -File .\Install-AppleMagicWindows.ps1 -SkipMouseDriver
+```
+
+仅安装鼠标驱动：
+
+```powershell
+powershell.exe -ExecutionPolicy Bypass -File .\Install-AppleMagicWindows.ps1 -SkipKeyboardDriver
+```
+
+安装后请重新连接设备；如果功能仍未生效，请重启 Windows。
 
 ## 可选：妙控键盘按键映射
 
-驱动安装完成后，可选安装 AutoHotkey v2 映射层，让 Apple 键盘底排更符合 Windows 快捷键习惯：
+安装驱动后，可选安装 AutoHotkey v2 映射层，让 Apple 键盘底排更符合 Windows 快捷键习惯：
 
 | Apple 键帽 | Windows 行为 |
 | --- | --- |
@@ -41,35 +71,6 @@ powershell.exe -ExecutionPolicy Bypass -File .\Install-AppleMagicKeyboardMapping
 ```
 
 `Fn` 键由键盘硬件处理，AutoHotkey 无法单独识别它；功能键和媒体键行为仍由 Apple 驱动决定。
-
-
-## 使用方法
-
-先在管理员 PowerShell 中验证文件：
-
-```powershell
-powershell.exe -ExecutionPolicy Bypass -File .\Install-AppleMagicWindows.ps1 -VerifyOnly
-```
-
-验证通过后安装：
-
-```powershell
-powershell.exe -ExecutionPolicy Bypass -File .\Install-AppleMagicWindows.ps1
-```
-
-只安装键盘驱动：
-
-```powershell
-powershell.exe -ExecutionPolicy Bypass -File .\Install-AppleMagicWindows.ps1 -SkipMouseDriver
-```
-
-只安装鼠标驱动：
-
-```powershell
-powershell.exe -ExecutionPolicy Bypass -File .\Install-AppleMagicWindows.ps1 -SkipKeyboardDriver
-```
-
-安装后如果功能没有立即生效，请重新插拔设备或重启 Windows。
 
 ## 安全说明
 
